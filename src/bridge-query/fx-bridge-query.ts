@@ -41,13 +41,26 @@ async function fetchBridgeTokens(chainId: number): Promise<BridgeToken[]> {
     return bridgeTokensJson;
 }
 
+async function main() {
+    const csvFile = fs.createWriteStream('fx-bridge-token-supply.csv');
+    csvFile.write('tokenAddress,tokenName,tokenSymbol,tokenDecimals,balance,timestamp,blockHeight\n'); // CSV header
 
-(async function main() {
-    const bridgeTokens = await fetchBridgeTokens(1);
-    console.log(`bridgeTokenList is: ${JSON.stringify(bridgeTokens, (key, value) => typeof value === 'bigint' ? value.toString() : value, 2)}`);
+    const intervalId = setInterval(async () => {
+        const bridgeTokensJson = await fetchBridgeTokens(1);
+        const timestamp = new Date().toISOString();
+        const blockNumber = await getBlockNumber(1);
+
+        for (const token of bridgeTokensJson) {
+            csvFile.write(`${token.tokenAddress},${token.tokenName},${token.tokenSymbol},${token.tokenDecimals},${token.balance},${timestamp},${blockNumber}\n`);
+        }
+    }, 5000); // Run every 5 seconds
+
+    setTimeout(() => {
+        clearInterval(intervalId); // Stop after 1 minute
+        csvFile.end(); // Close the CSV file
+    }, 60000);
 }
-)();
 
-//main().catch(console.error);
+main().catch(console.error);
 
 
