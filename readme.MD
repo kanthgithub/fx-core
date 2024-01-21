@@ -7,7 +7,7 @@ This is a repo with scripts to query
 
 ## ERC20 token on private evm chain
 
-- this module is in a branch and please checkout the branch `feature/validators-query`
+- this module contains the erc20 token deployment to a private chain running on ec2 instance.
 - all details and instructions for this are in readme file for erc20:
 [erc20-private-chain](./docs/erc20-private-chain.MD)
 
