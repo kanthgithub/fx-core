@@ -24,6 +24,14 @@ This is a repo with scripts to query
 ### Code directory
 [ERC20](./src/erc20/)
 
+### environment settings
+
+- refer the .env template:
+ [.env.example](.env.example)
+- copy to a new file `.env`
+- set the `EC2_CHAIN_RPC` with the value communicated via email
+- set your privateKey in `PRIVATE_KEY`
+
 ## fx-bridge query module
 
 - the script to query fx-bridge contract on ethereum chain 
