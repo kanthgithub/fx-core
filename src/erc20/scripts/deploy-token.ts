@@ -10,7 +10,7 @@ export const deployERC20Token = async (name: string, symbol: string, decimals: n
   try {
     const erc20TokenDeployFactoryContract = await ethers.getContractFactory('ERC20Token');
     // deploy the route
-    const erc20TokenContract : Contract = (await erc20TokenDeployFactoryContract.deploy(name, symbol, decimals)) as Contract;
+    const erc20TokenContract : Contract = (await erc20TokenDeployFactoryContract.deploy(name, symbol, decimals, ethers.utils.parseUnits('1000000', decimals))) as Contract;
     await erc20TokenContract.deployed();
 
     const erc20TokenAddress = erc20TokenContract.address;

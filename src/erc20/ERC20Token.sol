@@ -15,8 +15,9 @@ contract ERC20Token is ERC20 {
      * @param decimals_ The number of decimals used for token calculations.
      */
 
-    constructor(string memory name_, string memory symbol_, uint8 decimals_) ERC20(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_, uint8 decimals_, uint256 initialSupply) ERC20(name_, symbol_) {
         _decimals = decimals_;
+        _mint(msg.sender, initialSupply);
     }
 
     /**
